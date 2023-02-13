@@ -17,7 +17,7 @@ public class ProductController {
 	@Qualifier("productService")
 	private ProductService productService;
 	
-	@DeleteMapping("/api/products/{id}")
+	@DeleteMapping("/products/{id}")
 	public ResponseEntity<?> deleteProduct(@PathVariable int id) {
 		boolean existe = true;
 		existe = productService.removeProduct(id);
@@ -28,7 +28,7 @@ public class ProductController {
 		}
 	}
 	
-	@DeleteMapping("/api/categories/{id}/products")
+	@DeleteMapping("/categories/{id}/products")
 	public ResponseEntity<?> deleteAllProducts(@PathVariable int id) {
 		boolean existe = true;
 		existe = productService.removeProductsOfCategory(id);

@@ -17,7 +17,7 @@ public class CategoryController {
 	@Qualifier("categoryService")
 	private CategoryService categoryService;
 	
-	@DeleteMapping("/api/categories/{id}")
+	@DeleteMapping("/categories/{id}")
 	public ResponseEntity<?> deleteCategory(@PathVariable int id) {
 		boolean existe = true;
 		existe = categoryService.removeProductsAndCategory(id);
