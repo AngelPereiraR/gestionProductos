@@ -45,8 +45,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/register")
-	public User saveUser(@RequestBody User user) {
-		return userService.registrar(user);
+	public User saveUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("role") String role) {
+		return userService.registrar(new User(0, username, password, role, false, null));
 	}
 
 	private String getJWTToken(String username) {
