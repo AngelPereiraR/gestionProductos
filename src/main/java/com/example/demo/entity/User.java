@@ -18,9 +18,9 @@ public class User {
 	@Column(name="password", nullable=false)
 	private String password;
 	
-	private boolean enabled;
-	
 	private String role;
+	
+	private boolean enabled;
 	
 	private String token;
 
@@ -28,13 +28,13 @@ public class User {
 		super();
 	}
 
-	public User(long id, String username, String password, boolean enabled, String role, String token) {
+	public User(long id, String username, String password, String role, boolean enabled, String token) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.enabled = enabled;
 		this.role = role;
+		this.enabled = enabled;
 		this.token = token;
 	}
 
@@ -62,14 +62,6 @@ public class User {
 		this.password = password;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 	public String getRole() {
 		return role;
 	}
@@ -82,13 +74,21 @@ public class User {
 		return token;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public void setToken(String token) {
 		this.token = token;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", enabled=" + enabled
-				+ ", role=" + role + ", token=" + token + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", enabled=" + enabled
+				+ ", token=" + token + "]";
 	}
 }
