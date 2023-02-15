@@ -24,10 +24,17 @@ public class CategoryServiceImpl implements CategoryService {
 	private ProductRepository productRepository;
 
 	@Override
-	public CategoryModel addCategory(CategoryModel categoryModel) {
+	public Category addCategory(CategoryModel categoryModel) {
 		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.save(transform(categoryModel));
 	}
+	
+	@Override
+	public Category updateCategory(CategoryModel categoryModel) {
+		// TODO Auto-generated method stub
+		return categoryRepository.save(transform(categoryModel));
+	}
+
 
 	@Override
 	public List<CategoryModel> listAllCategories() {
@@ -38,13 +45,13 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category findCustomerById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return categoryRepository.findById(id);
 	}
 
 	@Override
 	public CategoryModel findCategoryByIdModel(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return transform(categoryRepository.findById(id));
 	}
 
 	@Override

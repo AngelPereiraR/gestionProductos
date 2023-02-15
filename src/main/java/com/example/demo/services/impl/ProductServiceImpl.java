@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+
 import com.example.demo.entity.Product;
+
 import com.example.demo.model.ProductModel;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.services.ProductService;
@@ -20,10 +23,17 @@ public class ProductServiceImpl implements ProductService {
 	private ProductRepository productRepository;
 
 	@Override
-	public ProductModel addProduct(ProductModel product) {
+	public Product addProduct(ProductModel product) {
 		// TODO Auto-generated method stub
-		return null;
+		return productRepository.save( transform(product));
 	}
+	
+	@Override
+	public Product updateProduct(ProductModel product) {
+		// TODO Auto-generated method stub
+		return productRepository.save( transform(product));
+	}
+
 
 	@Override
 	public List<ProductModel> listAllProducts() {
@@ -34,15 +44,24 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product findProductById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return productRepository.findById(id);
 	}
 
 	@Override
 	public ProductModel findProductByIdModel(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return transform(productRepository.findById(id));
 	}
-
+	
+	@Override
+	public List<ProductModel> listProductByCategory(int categoryId){
+		
+		List<ProductModel> products = new ArrayList<ProductModel>();
+		for (Product product : productRepository.findByCategoryid(categoryId))
+			products.add(transform(product));
+		return products;
+		
+	}
 	@Override
 	public boolean removeProduct(int id) {
 		productRepository.deleteById(id);
