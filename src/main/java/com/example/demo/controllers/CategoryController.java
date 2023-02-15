@@ -30,6 +30,7 @@ public class CategoryController {
 	{
 		
 		category.setId(id);
+		categoryService.addCategory(category);
 		return ResponseEntity.status(HttpStatus.CREATED).body(category);
 		
 	}

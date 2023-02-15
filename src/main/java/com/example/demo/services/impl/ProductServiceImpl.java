@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductModel> listProductByCategory(int categoryId){
 		
 		List<ProductModel> products = new ArrayList<ProductModel>();
-		for (Product product : productRepository.findByCategoryid(categoryId))
+		for (Product product : productRepository.findByCategoryId(categoryId))
 			products.add(transform(product));
 		return products;
 		
