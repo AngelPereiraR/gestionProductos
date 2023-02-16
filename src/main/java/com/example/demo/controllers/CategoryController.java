@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.Category;
 import com.example.demo.model.CategoryModel;
-import com.example.demo.model.ProductModel;
 import com.example.demo.services.CategoryService;
 
 @RestController
@@ -28,8 +26,6 @@ public class CategoryController {
 	@PostMapping("/categories/{id}")
 	public ResponseEntity<?> insertCategory(@PathVariable int id, @RequestBody CategoryModel category)
 	{
-		
-		category.setId(id);
 		categoryService.addCategory(category);
 		return ResponseEntity.status(HttpStatus.CREATED).body(category);
 		
@@ -47,7 +43,7 @@ public class CategoryController {
 	}
 	
 	@PutMapping("/categories/{id}")
-	public ResponseEntity<?> updateProductById(@PathVariable int id, @RequestBody CategoryModel product)
+	public ResponseEntity<?> updateCategoryById(@PathVariable int id, @RequestBody CategoryModel product)
 	{
 		
 		return ResponseEntity.ok(categoryService.updateCategory(product));
@@ -57,11 +53,11 @@ public class CategoryController {
 	@GetMapping("/categories/{id}")
 	public ResponseEntity<?> getProductById(@PathVariable int id){
 		
-		CategoryModel category= categoryService.findCategoryByIdModel(id);
+		CategoryModel category= categoryService.findCategoryModelById(id);
 		if(category==null) {
 			return ResponseEntity.noContent().build();
 		}else {
-			return	ResponseEntity.ok(category);
+			return ResponseEntity.ok(category);
 		}
 	}
 		

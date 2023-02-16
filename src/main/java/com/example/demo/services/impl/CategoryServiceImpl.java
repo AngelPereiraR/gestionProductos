@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Category;
+import com.example.demo.entity.Product;
 import com.example.demo.model.CategoryModel;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
@@ -43,13 +44,13 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category findCustomerById(int id) {
+	public Category findCategoryById(int id) {
 		// TODO Auto-generated method stub
 		return categoryRepository.findById(id);
 	}
 
 	@Override
-	public CategoryModel findCategoryByIdModel(int id) {
+	public CategoryModel findCategoryModelById(int id) {
 		// TODO Auto-generated method stub
 		return transform(categoryRepository.findById(id));
 	}
@@ -62,7 +63,10 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	public boolean removeProductsAndCategory(int categoryId) {
-		productRepository.deleteAllByCategoryId(categoryId);
+		List<Product> products = productRepository.findByCategoryId(categoryId);
+		for(Product p : products) {
+			productRepository.delete(p);
+		}
 		categoryRepository.deleteById(categoryId);
 		return false;
 	}

@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 public class ProductModel {
 	private long id;
 	
@@ -9,10 +11,20 @@ public class ProductModel {
 	
 	private double price;
 	
-	private CategoryModel categoryId;
+	@JsonBackReference
+	private CategoryModel category;
 
 	public ProductModel() {
 		super();
+	}
+
+	public ProductModel(long id, String name, String description, double price, CategoryModel category) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.category = category;
 	}
 
 	public long getId() {
@@ -47,17 +59,17 @@ public class ProductModel {
 		this.price = price;
 	}
 
-	public CategoryModel getCategoryId() {
-		return categoryId;
+	public CategoryModel getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(CategoryModel categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(CategoryModel category) {
+		this.category = category;
 	}
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
-				+ ", categoryId=" + categoryId + "]";
+				+ ", category=" + category + "]";
 	}
 }

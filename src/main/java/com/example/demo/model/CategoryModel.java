@@ -2,11 +2,7 @@ package com.example.demo.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class CategoryModel {
 	private long id;
@@ -15,6 +11,7 @@ public class CategoryModel {
 	
 	private String description;
 	
+	@JsonManagedReference
 	private List<ProductModel> categoryId;
 
 	public CategoryModel() {
@@ -28,7 +25,7 @@ public class CategoryModel {
 		this.description = description;
 		this.categoryId = categoryId;
 	}
-
+	
 	public long getId() {
 		return id;
 	}

@@ -1,11 +1,12 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -19,14 +20,24 @@ public class Product {
 	
 	private double price;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
-	private Category categoryId;
+	private Category category;
 
 	public Product() {
 		super();
 	}
 
+	public Product(long id, String name, String description, double price, Category category) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.category = category;
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -59,17 +70,17 @@ public class Product {
 		this.price = price;
 	}
 
-	public Category getCategoryId() {
-		return categoryId;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategoryId(Category categoryId) {
-		this.categoryId = categoryId;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
-				+ ", categoryId=" + categoryId + "]";
+				+ ", category=" + category + "]";
 	}
 }

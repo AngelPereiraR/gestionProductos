@@ -8,8 +8,8 @@ import com.example.demo.model.CategoryModel;
 public interface CategoryService {
 	public abstract Category addCategory(CategoryModel categoryModel);
 	public abstract List<CategoryModel> listAllCategories();
-	public abstract Category findCustomerById(int id);
-	public abstract CategoryModel findCategoryByIdModel(int id);
+	public abstract Category findCategoryById(int id);
+	public abstract CategoryModel findCategoryModelById(int id);
 	public abstract boolean removeCategory(int id);
 	public abstract boolean removeProductsAndCategory(int categoryId);
 	public abstract Category transform(CategoryModel categoryModel);
