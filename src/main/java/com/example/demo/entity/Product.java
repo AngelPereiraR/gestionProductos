@@ -18,6 +18,8 @@ public class Product {
 	
 	private String description;
 	
+	private boolean favorite;
+	
 	private double price;
 	
 	@JsonBackReference
@@ -29,13 +31,14 @@ public class Product {
 		super();
 	}
 
-	public Product(long id, String name, String description, double price, Category category) {
+	public Product(long id, String name, String description, double price, Category category, boolean favorite) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.category = category;
+		this.favorite = favorite;
 	}
 	
 	public long getId() {

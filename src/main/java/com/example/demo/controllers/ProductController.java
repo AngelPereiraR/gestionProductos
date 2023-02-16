@@ -73,6 +73,19 @@ public class ProductController {
 		
 	}
 	
+	@GetMapping("/products/favorite")
+	public ResponseEntity<?> getProductsFavorite(){
+		
+		List<ProductModel> products= productService.listProductByFavorite(true);
+		if(products.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}else {
+			return ResponseEntity.ok(products);
+		}
+	
+		
+	}
+	
 	@GetMapping("/products/{id}")
 	public ResponseEntity<?> getProductById(@PathVariable int id){
 		

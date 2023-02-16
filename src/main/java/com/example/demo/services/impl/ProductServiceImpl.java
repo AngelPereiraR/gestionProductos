@@ -62,6 +62,16 @@ public class ProductServiceImpl implements ProductService {
 		return products;
 		
 	}
+	
+	@Override
+	public List<ProductModel> listProductByFavorite(boolean favorite){
+		
+		List<ProductModel> products = new ArrayList<ProductModel>();
+		for (Product product : productRepository.findByCategoryFavorite(favorite))
+			products.add(transform(product));
+		return products;
+		
+	}
 	@Override
 	public boolean removeProduct(int id) {
 		productRepository.deleteById(id);

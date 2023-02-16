@@ -16,4 +16,5 @@ public interface ProductService {
 	public abstract ProductModel transform(Product product);
 	public abstract Product updateProduct(ProductModel product);
 	public abstract List<ProductModel> listProductByCategory(int idCategory);
+	public abstract List<ProductModel> listProductByFavorite(boolean favorite);
 }
