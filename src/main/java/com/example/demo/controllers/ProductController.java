@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Category;
 import com.example.demo.model.ProductModel;
 import com.example.demo.services.CategoryService;
 import com.example.demo.services.ProductService;
@@ -55,6 +56,8 @@ public class ProductController {
 	@PostMapping("/admin/categories/{id}/product")
 	public ResponseEntity<?> insertProduct(@PathVariable int id, @RequestBody ProductModel product)
 	{
+		Category category = categoryService.findCategoryById(id);
+		product.setCategory(categoryService.transform(category));
 		productService.addProduct(product);
 		return ResponseEntity.status(HttpStatus.CREATED).body(product);
 		
