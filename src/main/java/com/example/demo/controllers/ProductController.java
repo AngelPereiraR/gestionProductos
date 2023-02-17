@@ -30,7 +30,7 @@ public class ProductController {
 	@Qualifier("categoryService")
 	private CategoryService categoryService;
 	
-	@DeleteMapping("/products/{id}")
+	@DeleteMapping("/admin/products/{id}")
 	public ResponseEntity<?> deleteProduct(@PathVariable int id) {
 		boolean existe = true;
 		existe = productService.removeProduct(id);
@@ -41,7 +41,7 @@ public class ProductController {
 		}
 	}
 	
-	@DeleteMapping("/categories/{id}/products")
+	@DeleteMapping("/admin/categories/{id}/products")
 	public ResponseEntity<?> deleteAllProducts(@PathVariable int id) {
 		boolean existe = true;
 		existe = productService.removeProductsOfCategory(id);
@@ -52,7 +52,7 @@ public class ProductController {
 		}
 	}
 	
-	@PostMapping("/categories/{id}/product")
+	@PostMapping("/admin/categories/{id}/product")
 	public ResponseEntity<?> insertProduct(@PathVariable int id, @RequestBody ProductModel product)
 	{
 		productService.addProduct(product);
@@ -60,8 +60,8 @@ public class ProductController {
 		
 	}
 	
-	@GetMapping("/categories/{id}/products")
-	public ResponseEntity<?> getProductsCategory(@PathVariable int id){
+	@GetMapping("/user/categories/{id}/products")
+	public ResponseEntity<?> getProductsByCategory(@PathVariable int id){
 		
 		List<ProductModel> products= productService.listProductByCategory(id);
 		if(products.isEmpty()) {
@@ -73,7 +73,7 @@ public class ProductController {
 		
 	}
 	
-	@GetMapping("/products/favorite")
+	@GetMapping("/user/products/favorite")
 	public ResponseEntity<?> getProductsFavorite(){
 		
 		List<ProductModel> products= productService.listProductByFavorite(true);
@@ -100,7 +100,7 @@ public class ProductController {
 	}
 	
 	
-	@PutMapping("/products/{id}")
+	@PutMapping("/admin/products/{id}")
 	public ResponseEntity<?> updateProductById(@PathVariable int id, @RequestBody ProductModel product)
 	{
 		

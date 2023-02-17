@@ -23,7 +23,7 @@ public class CategoryController {
 	@Qualifier("categoryService")
 	private CategoryService categoryService;
 	
-	@PostMapping("/categories/{id}")
+	@PostMapping("/admin/categories/{id}")
 	public ResponseEntity<?> insertCategory(@PathVariable int id, @RequestBody CategoryModel category)
 	{
 		categoryService.addCategory(category);
@@ -31,7 +31,7 @@ public class CategoryController {
 		
 	}
 	
-	@DeleteMapping("/categories/{id}")
+	@DeleteMapping("/admin/categories/{id}")
 	public ResponseEntity<?> deleteCategory(@PathVariable int id) {
 		boolean existe = true;
 		existe = categoryService.removeProductsAndCategory(id);
@@ -42,7 +42,7 @@ public class CategoryController {
 		}
 	}
 	
-	@PutMapping("/categories/{id}")
+	@PutMapping("/admin/categories/{id}")
 	public ResponseEntity<?> updateCategoryById(@PathVariable int id, @RequestBody CategoryModel product)
 	{
 		
@@ -50,8 +50,8 @@ public class CategoryController {
 		
 	}
 	
-	@GetMapping("/categories/{id}")
-	public ResponseEntity<?> getProductById(@PathVariable int id){
+	@GetMapping("/user/categories/{id}")
+	public ResponseEntity<?> getCategoryById(@PathVariable int id){
 		
 		CategoryModel category= categoryService.findCategoryModelById(id);
 		if(category==null) {

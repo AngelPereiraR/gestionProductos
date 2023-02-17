@@ -13,5 +13,5 @@ public interface ProductRepository extends JpaRepository <Product, Serializable>
 	public abstract Product findById(int id);
 	public abstract void deleteAllByCategoryId(int categoryId);
 	public abstract List<Product> findByCategoryId(int categoryId);
-	public abstract List<Product> findByCategoryFavorite(boolean favorite);
+	public abstract List<Product> findByFavorite(boolean favorite);
 }

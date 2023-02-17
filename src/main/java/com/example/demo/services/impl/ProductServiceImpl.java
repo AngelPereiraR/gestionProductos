@@ -67,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductModel> listProductByFavorite(boolean favorite){
 		
 		List<ProductModel> products = new ArrayList<ProductModel>();
-		for (Product product : productRepository.findByCategoryFavorite(favorite))
+		for (Product product : productRepository.findByFavorite(favorite))
 			products.add(transform(product));
 		return products;
 		

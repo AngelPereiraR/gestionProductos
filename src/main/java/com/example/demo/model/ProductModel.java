@@ -80,7 +80,7 @@ public class ProductModel {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
-				+ ", category=" + category + "]";
+		return "ProductModel [id=" + id + ", name=" + name + ", description=" + description + ", favorite=" + favorite
+				+ ", price=" + price + ", category=" + category + "]";
 	}
 }
