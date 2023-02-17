@@ -21,7 +21,7 @@ public class SecurityConfig {
 		addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class).
 		authorizeHttpRequests().
 		requestMatchers("/api/**").authenticated().
-		anyRequest().permitAll();
+		anyRequest().permitAll().requestMatchers("/api/admin/**").authenticated().anyRequest().hasRole("ROLE_ADMIN");
 		return http.build();
 	}
 	

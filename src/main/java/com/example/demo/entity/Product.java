@@ -41,6 +41,14 @@ public class Product {
 		this.favorite = favorite;
 	}
 	
+	public boolean isFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(boolean favorite) {
+		this.favorite = favorite;
+	}
+
 	public long getId() {
 		return id;
 	}
