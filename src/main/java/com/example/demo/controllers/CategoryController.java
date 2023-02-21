@@ -1,5 +1,7 @@
 package com.example.demo.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -55,6 +57,17 @@ public class CategoryController {
 		
 		CategoryModel category= categoryService.findCategoryModelById(id);
 		if(category==null) {
+			return ResponseEntity.noContent().build();
+		}else {
+			return ResponseEntity.ok(category);
+		}
+	}
+	
+	@GetMapping("/categories")
+	public ResponseEntity<?> getCategories(){
+		
+		List<CategoryModel> category= categoryService.findCategories();
+		if(category.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}else {
 			return ResponseEntity.ok(category);

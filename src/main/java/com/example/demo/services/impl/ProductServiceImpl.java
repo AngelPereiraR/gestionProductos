@@ -96,4 +96,13 @@ public class ProductServiceImpl implements ProductService {
 		return modelMapper.map(category, ProductModel.class);
 	}
 
+	@Override
+	public List<ProductModel> listProducts() {
+		List<ProductModel> productsModel = new ArrayList<ProductModel>();
+		for(Product p : productRepository.findAll()) {
+			productsModel.add(transform(p));
+		}
+		return productsModel;
+	}
+
 }

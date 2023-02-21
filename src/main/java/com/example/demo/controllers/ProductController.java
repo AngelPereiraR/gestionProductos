@@ -89,6 +89,19 @@ public class ProductController {
 		
 	}
 	
+	@GetMapping("/products")
+	public ResponseEntity<?> getProducts(){
+		
+		List<ProductModel> products= productService.listProducts();
+		if(products.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}else {
+			return ResponseEntity.ok(products);
+		}
+	
+		
+	}
+	
 	@GetMapping("/products/{id}")
 	public ResponseEntity<?> getProductById(@PathVariable int id){
 		

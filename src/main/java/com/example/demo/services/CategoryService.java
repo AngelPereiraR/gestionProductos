@@ -15,4 +15,5 @@ public interface CategoryService {
 	public abstract Category transform(CategoryModel categoryModel);
 	public abstract CategoryModel transform(Category category);
 	public abstract Category updateCategory(CategoryModel categoryModel);
+	public abstract List<CategoryModel> findCategories();
 }

@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -81,5 +82,14 @@ public class CategoryServiceImpl implements CategoryService {
 	public CategoryModel transform(Category category) {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(category, CategoryModel.class);
+	}
+
+	@Override
+	public List<CategoryModel> findCategories() {
+		List<CategoryModel> categories = new ArrayList<CategoryModel>();
+		for(Category c : categoryRepository.findAll()) {
+			categories.add(transform(c));
+		}
+		return categories;
 	}
 }
