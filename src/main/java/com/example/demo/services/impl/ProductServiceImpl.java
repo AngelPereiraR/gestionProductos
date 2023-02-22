@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-
+import com.example.demo.entity.Category;
 import com.example.demo.entity.Product;
-
 import com.example.demo.model.ProductModel;
+import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
 import com.example.demo.services.ProductService;
+
+import jakarta.transaction.Transactional;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService {
@@ -21,6 +23,10 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	@Qualifier("productRepository")
 	private ProductRepository productRepository;
+	
+	@Autowired
+	@Qualifier("categoryRepository")
+	private CategoryRepository categoryRepository;
 
 	@Override
 	public Product addProduct(ProductModel product) {
@@ -78,9 +84,11 @@ public class ProductServiceImpl implements ProductService {
 		return false;
 	}
 
+	@Transactional
 	@Override
 	public boolean removeProductsOfCategory(int categoryId) {
-		productRepository.deleteAllByCategoryId(categoryId);
+		Category category = categoryRepository.findById(categoryId);
+		productRepository.deleteAllByCategory(category);
 		return false;
 	}
 
