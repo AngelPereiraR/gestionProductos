@@ -6,10 +6,12 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Product;
+import com.example.demo.entity.User;
 import com.example.demo.model.ProductModel;
 import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
@@ -28,9 +30,23 @@ public class ProductServiceImpl implements ProductService {
 	@Qualifier("categoryRepository")
 	private CategoryRepository categoryRepository;
 
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+	@Override
+	public  com.example.demo.entity.User addProductFavorite(ProductModel product) {
+		// TODO Auto-generated method stub
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		com.example.demo.entity.User usuario = userService.findUser(email);
+		usuario.getFavorites().add(transform(product));
+		
+		return userService.updateUser(userService.transform(usuario));
+	}
+	
 	@Override
 	public Product addProduct(ProductModel product) {
 		// TODO Auto-generated method stub
+		
 		return productRepository.save( transform(product));
 	}
 	
@@ -102,6 +118,17 @@ public class ProductServiceImpl implements ProductService {
 	public ProductModel transform(Product category) {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(category, ProductModel.class);
+	}
+	
+	@Override
+	public List<ProductModel> listProductsFavorites() {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		com.example.demo.entity.User usuario = userService.findUser(email);
+		List<ProductModel> productsModel = new ArrayList<ProductModel>();
+		for(Product p : usuario.getFavorites()) {
+			productsModel.add(transform(p));
+		}
+		return productsModel;
 	}
 
 	@Override

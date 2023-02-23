@@ -1,5 +1,9 @@
 package com.example.demo.model;
 
+import java.util.List;
+
+import com.example.demo.entity.Product;
+
 public class UserModel {
 
 private long id;
@@ -10,6 +14,8 @@ private long id;
 	
 	private String role;
 	
+	private List<Product> favorites;
+	
 	private boolean enabled;
 	
 	private String token;
@@ -18,15 +24,21 @@ private long id;
 		super();
 	}
 
-	public UserModel(long id, String username, String password, String role, boolean enabled, String token) {
+	
+
+	public UserModel(long id, String username, String password, String role, List<Product> favorites, boolean enabled,
+			String token) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.favorites = favorites;
 		this.enabled = enabled;
 		this.token = token;
 	}
+
+
 
 	public long getId() {
 		return id;
@@ -63,6 +75,20 @@ private long id;
 	public String getToken() {
 		return token;
 	}
+	
+	
+
+	public List<Product> getFavorites() {
+		return favorites;
+	}
+
+
+
+	public void setFavorites(List<Product> favorites) {
+		this.favorites = favorites;
+	}
+
+
 
 	public boolean isEnabled() {
 		return enabled;
@@ -76,9 +102,13 @@ private long id;
 		this.token = token;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", enabled=" + enabled
-				+ ", token=" + token + "]";
+		return "UserModel [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role
+				+ ", favorites=" + favorites + ", enabled=" + enabled + ", token=" + token + "]";
 	}
+
+	
 }

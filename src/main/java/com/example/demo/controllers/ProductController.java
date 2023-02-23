@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Category;
+
 import com.example.demo.model.ProductModel;
 import com.example.demo.services.CategoryService;
 import com.example.demo.services.ProductService;
+import com.example.demo.services.impl.UserService;
 
 @RestController
 @RequestMapping("/api")
@@ -26,6 +29,8 @@ public class ProductController {
 	@Autowired
 	@Qualifier("productService")
 	private ProductService productService;
+	
+
 	
 	@Autowired
 	@Qualifier("categoryService")
@@ -75,11 +80,20 @@ public class ProductController {
 	
 		
 	}
-	
+	@PostMapping("/admin/categories/{id}/product/favorite")
+	public ResponseEntity<?> insertProductFavorite(@PathVariable int id, @RequestBody ProductModel product)
+	{
+		Category category = categoryService.findCategoryById(id);
+		product.setCategory(categoryService.transform(category));
+		productService.addProductFavorite(product);
+		return ResponseEntity.status(HttpStatus.CREATED).body(product);
+		
+	}
 	@GetMapping("/user/products/favorite")
 	public ResponseEntity<?> getProductsFavorite(){
 		
-		List<ProductModel> products= productService.listProductByFavorite(true);
+		
+		List<ProductModel> products= productService.listProductsFavorites();
 		if(products.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}else {

@@ -1,5 +1,6 @@
 package com.example.demo.services.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Category;
+import com.example.demo.entity.Product;
+import com.example.demo.model.CategoryModel;
+import com.example.demo.model.ProductModel;
+import com.example.demo.model.UserModel;
 import com.example.demo.repository.UserRepository;
 
 @Service("userService")
@@ -55,5 +61,21 @@ public class UserService implements UserDetailsService {
 
 	public com.example.demo.entity.User findUser(String username) {
 		return userRepository.findByUsername(username);
+	}
+	
+	public com.example.demo.entity.User transform(UserModel userModel) {
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper.map(userModel, com.example.demo.entity.User.class);
+	}
+	
+
+	
+	public UserModel transform(com.example.demo.entity.User user) {
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper.map(user, UserModel.class);
+	}
+	public com.example.demo.entity.User updateUser(UserModel user) {
+		// TODO Auto-generated method stub
+		return userRepository.save(transform(user));
 	}
 }

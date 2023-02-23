@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +22,8 @@ public class User {
 	
 	private String role;
 	
+	private List<Product> favorites;
+	
 	private boolean enabled;
 	
 	private String token;
@@ -28,15 +32,21 @@ public class User {
 		super();
 	}
 
-	public User(long id, String username, String password, String role, boolean enabled, String token) {
+	
+
+	public User(long id, String username, String password, String role, List<Product> favorites, boolean enabled,
+			String token) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.favorites = favorites;
 		this.enabled = enabled;
 		this.token = token;
 	}
+
+
 
 	public long getId() {
 		return id;
@@ -86,9 +96,26 @@ public class User {
 		this.token = token;
 	}
 
+
+
+	public List<Product> getFavorites() {
+		return favorites;
+	}
+
+
+
+	public void setFavorites(List<Product> favorites) {
+		this.favorites = favorites;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", enabled=" + enabled
-				+ ", token=" + token + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role
+				+ ", favorites=" + favorites + ", enabled=" + enabled + ", token=" + token + "]";
 	}
+	
+	
+
 }
