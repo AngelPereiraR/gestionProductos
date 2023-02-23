@@ -2,7 +2,6 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,37 +18,26 @@ public class Product {
 	
 	private String description;
 	
-	private boolean favorite;
-	
 	private double price;
 	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	private Category category;
-
+	
 	public Product() {
 		super();
 	}
 
-	public Product(long id, String name, String description, double price, Category category, boolean favorite) {
+	public Product(long id, String name, String description, double price, Category category) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.category = category;
-		this.favorite = favorite;
 	}
 	
-	public boolean isFavorite() {
-		return favorite;
-	}
-
-	public void setFavorite(boolean favorite) {
-		this.favorite = favorite;
-	}
-
 	public long getId() {
 		return id;
 	}
@@ -92,7 +80,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", favorite=" + favorite
-				+ ", price=" + price + ", category=" + category + "]";
+		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
+				+ ", category=" + category + "]";
 	}
 }

@@ -17,7 +17,6 @@ public interface ProductService {
 	public abstract ProductModel transform(Product product);
 	public abstract Product updateProduct(ProductModel product);
 	public abstract List<ProductModel> listProductByCategory(int idCategory);
-	public abstract List<ProductModel> listProductByFavorite(boolean favorite);
 	public abstract List<ProductModel> listProducts();
 	public abstract List<ProductModel> listProductsFavorites();
 	public abstract  com.example.demo.entity.User addProductFavorite(ProductModel product);
