@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 public class UserModel {
 
 private long id;
@@ -10,6 +12,8 @@ private long id;
 	
 	private String role;
 	
+	private List<FavoriteProduct> favorite;
+	
 	private boolean enabled;
 	
 	private String token;
@@ -18,17 +22,22 @@ private long id;
 		super();
 	}
 
-	public UserModel(long id, String username, String password, String role, boolean enabled,
-			String token) {
+	
+	
+	public UserModel(long id, String username, String password, String role, List<FavoriteProduct> favorite,
+			boolean enabled, String token) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = role;
+		this.favorite = favorite;
 		this.enabled = enabled;
 		this.token = token;
 	}
-	
+
+
+
 	public long getId() {
 		return id;
 	}
@@ -76,6 +85,20 @@ private long id;
 	public void setToken(String token) {
 		this.token = token;
 	}
+	
+	
+
+	public List<FavoriteProduct> getFavorite() {
+		return favorite;
+	}
+
+
+
+	public void setFavorite(List<FavoriteProduct> favorite) {
+		this.favorite = favorite;
+	}
+
+
 
 	@Override
 	public String toString() {

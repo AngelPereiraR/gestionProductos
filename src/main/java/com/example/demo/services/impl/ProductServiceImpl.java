@@ -10,11 +10,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Category;
+import com.example.demo.entity.Favorite;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.User;
+import com.example.demo.model.FavoriteProduct;
 import com.example.demo.model.ProductModel;
 import com.example.demo.repository.CategoryRepository;
+import com.example.demo.repository.FavoriteRepository;
 import com.example.demo.repository.ProductRepository;
+import com.example.demo.services.FavoriteService;
 import com.example.demo.services.ProductService;
 
 import jakarta.transaction.Transactional;
@@ -31,16 +35,28 @@ public class ProductServiceImpl implements ProductService {
 	private CategoryRepository categoryRepository;
 
 	@Autowired
+	@Qualifier("favoriteRepository")
+	private FavoriteRepository favoriteRepository;
+	
+	@Autowired
 	@Qualifier("userService")
 	private UserService userService;
+	
+	@Autowired
+	@Qualifier("favoriteService")
+	private FavoriteService favoriteService;
 	@Override
-	public  com.example.demo.entity.User addProductFavorite(ProductModel product) {
+	public  Favorite addProductFavorite(ProductModel product) {
 		// TODO Auto-generated method stub
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		com.example.demo.entity.User usuario = userService.findUser(email);
-		usuario.getFavorites().add(transform(product));
+		FavoriteProduct fav= new FavoriteProduct();
+		fav.setProduct(product);
 		
-		return userService.updateUser(userService.transform(usuario));
+		fav.setUser(userService.transform(usuario));
+		
+		return favoriteRepository.save(favoriteService.transform(fav));
+		
 	}
 	
 	@Override
@@ -116,8 +132,8 @@ public class ProductServiceImpl implements ProductService {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		com.example.demo.entity.User usuario = userService.findUser(email);
 		List<ProductModel> productsModel = new ArrayList<ProductModel>();
-		for(Product p : usuario.getFavorites()) {
-			productsModel.add(transform(p));
+		for(Favorite p : favoriteRepository.findAllByUser(usuario)) {
+			productsModel.add(transform(p.getProduct()));
 		}
 		return productsModel;
 	}

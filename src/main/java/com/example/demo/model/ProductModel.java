@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 public class ProductModel {
@@ -13,19 +15,25 @@ public class ProductModel {
 	
 	@JsonBackReference
 	private CategoryModel category;
+	
+	private List<FavoriteProduct> favorite;
 
 	public ProductModel() {
 		super();
 	}
 
-	public ProductModel(long id, String name, String description, double price, CategoryModel category) {
+	
+	public ProductModel(long id, String name, String description, double price, CategoryModel category,
+			List<FavoriteProduct> favorite) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.category = category;
+		this.favorite = favorite;
 	}
+
 
 	public long getId() {
 		return id;
@@ -66,6 +74,18 @@ public class ProductModel {
 	public void setCategory(CategoryModel category) {
 		this.category = category;
 	}
+
+	
+	
+	public List<FavoriteProduct> getFavorite() {
+		return favorite;
+	}
+
+
+	public void setFavorite(List<FavoriteProduct> favorite) {
+		this.favorite = favorite;
+	}
+
 
 	@Override
 	public String toString() {

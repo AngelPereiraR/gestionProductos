@@ -1,9 +1,15 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -18,6 +24,10 @@ public class User {
 	@Column(name="password", nullable=false)
 	private String password;
 	
+	@JsonManagedReference
+	@OneToMany( mappedBy = "product")
+	private List<Favorite> favorite;
+	
 	private String role;
 	
 	private boolean enabled;
@@ -28,12 +38,15 @@ public class User {
 		super();
 	}
 
-	public User(long id, String username, String password, String role, boolean enabled,
+
+
+	public User(long id, String username, String password, List<Favorite> favorite, String role, boolean enabled,
 			String token) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.favorite = favorite;
 		this.role = role;
 		this.enabled = enabled;
 		this.token = token;
@@ -89,6 +102,20 @@ public class User {
 		this.token = token;
 	}
 	
+	
+	
+	public List<Favorite> getFavorite() {
+		return favorite;
+	}
+
+
+
+	public void setFavorite(List<Favorite> favorite) {
+		this.favorite = favorite;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role

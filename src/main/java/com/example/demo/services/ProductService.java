@@ -2,8 +2,10 @@ package com.example.demo.services;
 
 import java.util.List;
 
+import com.example.demo.entity.Favorite;
 import com.example.demo.entity.Product;
 import com.example.demo.entity.User;
+import com.example.demo.model.FavoriteProduct;
 import com.example.demo.model.ProductModel;
 
 public interface ProductService {
@@ -19,5 +21,5 @@ public interface ProductService {
 	public abstract List<ProductModel> listProductByCategory(int idCategory);
 	public abstract List<ProductModel> listProducts();
 	public abstract List<ProductModel> listProductsFavorites();
-	public abstract  com.example.demo.entity.User addProductFavorite(ProductModel product);
+	public abstract  Favorite addProductFavorite(ProductModel product);
 }
