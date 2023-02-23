@@ -25,8 +25,8 @@ public class CategoryController {
 	@Qualifier("categoryService")
 	private CategoryService categoryService;
 	
-	@PostMapping("/admin/categories/{id}")
-	public ResponseEntity<?> insertCategory(@PathVariable int id, @RequestBody CategoryModel category)
+	@PostMapping("/admin/categories")
+	public ResponseEntity<?> insertCategory(@RequestBody CategoryModel category)
 	{
 		categoryService.addCategory(category);
 		return ResponseEntity.status(HttpStatus.CREATED).body(category);
