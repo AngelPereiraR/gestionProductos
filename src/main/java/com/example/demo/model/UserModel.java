@@ -2,6 +2,8 @@ package com.example.demo.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 public class UserModel {
 
 private long id;
@@ -12,6 +14,7 @@ private long id;
 	
 	private String role;
 	
+	@JsonManagedReference
 	private List<FavoriteProduct> favorite;
 	
 	private boolean enabled;

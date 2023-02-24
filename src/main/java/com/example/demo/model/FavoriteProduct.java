@@ -13,8 +13,10 @@ import jakarta.persistence.ManyToOne;
 public class FavoriteProduct {
 	private long id;
 	
+	@JsonBackReference
 	private ProductModel product;
 	
+	@JsonBackReference
 	private UserModel user;
 	
 	public FavoriteProduct() {

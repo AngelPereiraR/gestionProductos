@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 22-02-2023 a las 11:00:09
+-- Tiempo de generación: 24-02-2023 a las 13:41:59
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -38,8 +38,8 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `description`, `name`) VALUES
-(52, 'Estos son muebles', 'Muebles 2'),
-(152, 'Esto es comida', 'Comida');
+(6, 'Estos son muebles 2a opcion.', 'Muebles'),
+(2, 'Esto es comida', 'Comida');
 
 -- --------------------------------------------------------
 
@@ -56,7 +56,36 @@ CREATE TABLE `category_seq` (
 --
 
 INSERT INTO `category_seq` (`next_val`) VALUES
-(351);
+(201);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `favorite`
+--
+
+CREATE TABLE `favorite` (
+  `id` bigint(20) NOT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `favorite_seq`
+--
+
+CREATE TABLE `favorite_seq` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `favorite_seq`
+--
+
+INSERT INTO `favorite_seq` (`next_val`) VALUES
+(101);
 
 -- --------------------------------------------------------
 
@@ -69,19 +98,17 @@ CREATE TABLE `product` (
   `description` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `price` double NOT NULL,
-  `category_id` bigint(20) DEFAULT NULL,
-  `favorite` bit(1) NOT NULL
+  `category_id` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `product`
 --
 
-INSERT INTO `product` (`id`, `description`, `name`, `price`, `category_id`, `favorite`) VALUES
-(304, 'Esto es una silla.', 'Silla', 15, 52, b'1'),
-(305, 'Esto es una mesa', 'Mesa', 15, 52, b'1'),
-(402, 'Esto es una mesa', 'Mesa', 15, 52, b'0'),
-(409, 'Es una fruta', 'Manzana', 4, 152, b'0');
+INSERT INTO `product` (`id`, `description`, `name`, `price`, `category_id`) VALUES
+(58, 'Esto es una silla', 'Silla', 15, 6),
+(59, 'Esto es una mesa', 'Mesa', 15, 6),
+(153, 'Es una pera', 'Pera', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -98,7 +125,7 @@ CREATE TABLE `product_seq` (
 --
 
 INSERT INTO `product_seq` (`next_val`) VALUES
-(501);
+(251);
 
 -- --------------------------------------------------------
 
@@ -120,8 +147,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `enabled`, `password`, `role`, `token`, `username`) VALUES
-(1, b'1', '$2a$10$PNYu6HJNjrHc7ZocthMyzOM8X/U0Nv9VFLgY2AcPa3lyp1pxnMCtS', 'ROLE_ADMIN', NULL, 'Admin'),
-(2, b'1', '$2a$10$77Glt34eEZVqTj9Jazcgt.YFLDVNk.sBI6iKKqEIDqhJQ.2PD61uG', 'ROLE_USER', NULL, 'Ángel');
+(1, b'1', '$2a$10$HHxWu321yLtNCupN8gp5..PcUu1ewlcq8l31NhWeBPamMsosvXLdm', 'ROLE_USER', NULL, 'Ángel'),
+(2, b'1', '$2a$10$WHGhqZ9ty3fGX08MpHgG3.Y8T3p1AmnE6W7oPZ7ZE64vSbQdBjimy', 'ROLE_ADMIN', NULL, 'Admin'),
+(3, b'1', '$2a$10$4apfMojVQG6yBHsQLhcpjuR.BIjz69S/CquUiGOHCC2fXJY51b2Fy', 'ROLE_USER', NULL, 'Manuel');
 
 -- --------------------------------------------------------
 
@@ -138,7 +166,7 @@ CREATE TABLE `user_seq` (
 --
 
 INSERT INTO `user_seq` (`next_val`) VALUES
-(201);
+(151);
 
 --
 -- Índices para tablas volcadas
@@ -149,6 +177,14 @@ INSERT INTO `user_seq` (`next_val`) VALUES
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `favorite`
+--
+ALTER TABLE `favorite`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKbg4txsew6x3gl6r9swcq190hg` (`product_id`),
+  ADD KEY `FKh3f2dg11ibnht4fvnmx60jcif` (`user_id`);
 
 --
 -- Indices de la tabla `product`

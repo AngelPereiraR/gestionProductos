@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -33,6 +34,7 @@ public class Product {
 	
 	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+	@JsonIgnore
 	private List<Favorite> favorite;
 	
 	public Product() {
